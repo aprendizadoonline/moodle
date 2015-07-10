@@ -1,0 +1,42 @@
+html, body {
+	font-family: sans-serif;
+}
+
+#nMsg .content {
+	padding: 160px 250px 0;
+}	
+
+#nMsg .content .info {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #0AC;
+	display: block;
+}
+
+#nMsg .content #word {
+	letter-spacing: 30px;
+	font-size: 50px;
+	padding-top: 10px;
+	display: block;
+}
+
+#textMeasureAux, .Peixe {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+#textMeasureAux {
+	display: none;
+}
+
+#ActionBtn {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+	font-weight: bold;
+	display: none;
+}
+
+#successForm {
+	display: none;
+}

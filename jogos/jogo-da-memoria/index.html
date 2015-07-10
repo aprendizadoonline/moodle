@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Jogo da Memória | Aprendizado Online</title>
+		<link rel="shortcut icon" href="favicon.ico" />
+		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		
+		<!--
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		-->
+		<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+		<script src="js/utils.js"></script>
+		<script src="js/game.js"></script>
+		<script>
+			$(function() {
+				jogo = new JogoDaMemoria({
+					container   	: $('#game-board-container'),	// Container do jogo
+					endGameContainer: $('#end-game-container'),		// Container do fim de jogo
+					attemptCounter	: $('#attempt-counter'),		// Contador de tentativas
+					successCounter	: $('#success-counter'),		// Contador de sucessos
+					restartButton   : $('.restart-button'),			// Botão de reiniciar
+					timer			: $('#timer'),					// Timer
+					tableWidth  : 4, 								// Largura do tabuleiro
+					tableHeight : 4,								// Altura do tabuleiro
+					cardData	: [									// Cartas
+						["2", ["1+1"]],
+						["4", ["2+2", "3+1"]],
+						["8", ["7+1"]],
+						["13", ["7+6", "10+3"]],
+						["5", ["2+3", "3+1+1"]],
+						["16", ["8+8", "10+6"]],
+						["11", ["2+9", "9+2"]],
+						["15", ["7+3+5", "11+4"]],
+					],
+					templates   : {								// Templates
+						row: '<div class="row">',				// - Linha
+						element: '<span class="card">'			// - Carta
+					},
+					settings	: {								// Configurações do jogo
+						initialWaitTime : 5000,					// - Tempo de espera inicial em milissegundos
+						errorWaitTime	: 2500,					// - Tempo de espera para visualizar as cartas após um erro em milissegundos
+					}
+				});
+				
+				jogo.run();
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-7">
+					<div class="row">
+						<div class="col-md-12 text-center" id="logo">
+							<img src="img/logo.png"/>
+						</div>
+					</div>
+					
+					<div id="game-board-container" class="well">
+						<div id="end-game-container">
+							<h1 class="text-center">Parabéns!</h1>
+							<p class="lead">Você conseguiu terminar o jogo em <span id="time"></span>, utilizando <span id="attempts"></span>!</p>
+							<p class="lead">Tente novamente para diminuir o seu tempo e suas tentativas!</p>
+							<button type="button" class="btn btn-default restart-button" aria-label="Left Align">
+								<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Tentar novamente
+							</button>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-5" id="sidebar">
+					<div class="panel panel-default">
+						<div class="panel-heading">Instruções</div>
+						<div class="panel-body text-justify">
+							<p>Encontre os pares correspondentes no menor número de tentativas e no menor tempo possível!</p>
+							<p>Basta clicar sobre a carta para revelar seu conteúdo, se você revelar duas cartas correspondentes, elas ficarão viradas até o final do jogo. Você ganha quando todas as cartas estiverem viradas para cima!</p>
+						</div>
+					</div>
+					
+					<div class="panel panel-primary">
+						<div class="panel-heading">Pontuação</div>
+						<div class="panel-body" id="points">
+							<div class="row">
+								<div class="col-md-6 text-center">
+									<p class="label label-success">Acertos <span class="badge" id="success-counter">0</span></p>
+									<p class="label label-default">Tentativas <span class="badge" id="attempt-counter">0</span></p>
+									<button type="button" class="btn btn-default restart-button" aria-label="Left Align">
+										<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Tentar novamente
+									</button>
+								</div>
+								<div class="col-md-6 text-center">
+									<h1 id="timer"></h1>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default">
+						<div class="panel-heading">Desenvolvido por</div>
+						<div class="panel-body text-center">
+							<p><a href="http://www.aprendizadoonline.com.br"><img src="img/logo-aprendizado.png" /></a></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

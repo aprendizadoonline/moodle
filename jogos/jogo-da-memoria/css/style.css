@@ -1,0 +1,61 @@
+#logo {
+	margin: 10px;
+}
+
+#sidebar {
+	margin-top: 50px;
+}
+
+#sidebar .panel {
+	margin-bottom: 10px;
+}
+
+#game-board-container {
+	overflow: hidden;
+	text-align: center;
+	position: relative;
+	z-index: 0;
+}
+
+#game-board-container .card {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	background: #0099cc url(../img/card-front.png);
+	margin: 5px;
+	font-size: 30px;
+	color: white;
+	font-weight: bold;
+	cursor: pointer;
+	-webkit-transition: transform 2s, background-image 0s 500ms, text-indent 0s 500ms; /* Chrome, Safari, Opera */
+    transition: transform 2s, background-image 0s 500ms, text-indent 0s 500ms;
+}
+
+#game-board-container .row .card:first-child {
+	margin-left: 15px;
+}
+
+#game-board-container .card.down {
+	-ms-transform: rotateY(180deg); /* IE 9 */
+    -webkit-transform: rotateY(180deg); /* Chrome, Safari, Opera */
+    transform: rotateY(180deg);
+	text-indent: 65000px;
+	background-image: url(../img/card-back.png);
+}
+
+#end-game-container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(255, 255, 255, 0.9);
+	z-index: 1;
+}
+
+#points .label {
+	font-size: 110%;
+	display: block;
+}

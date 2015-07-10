@@ -1,0 +1,95 @@
+-- -----------------------------------------------------
+-- Table `mydb`.`level`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`level` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `instruction` VARCHAR(512) NULL,
+  `awnser` VARCHAR(64) NULL,
+  `options` VARCHAR(1024) NULL,
+  `image` VARCHAR(512) NULL,
+  `order` INT UNSIGNED NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `ordem_UNIQUE` (`order` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`class`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`class` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(128) NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`user` (
+  `iduser` INT NOT NULL,
+  `turma_id` INT NOT NULL,
+  `tutor_id` INT NOT NULL,
+  `class_id` INT NOT NULL,
+  PRIMARY KEY (`iduser`, `turma_id`, `tutor_id`, `class_id`),
+  INDEX `fk_user_turma1_idx` (`turma_id` ASC),
+  INDEX `fk_user_user1_idx` (`tutor_id` ASC, `class_id` ASC),
+  CONSTRAINT `fk_user_turma1`
+    FOREIGN KEY (`turma_id`)
+    REFERENCES `mydb`.`class` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_user1`
+    FOREIGN KEY (`tutor_id` , `class_id`)
+    REFERENCES `mydb`.`user` (`iduser` , `turma_id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`pontuacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`pontuacao` (
+  `user_id` INT NOT NULL,
+  `level_id` INT NOT NULL,
+  `time` INT NULL,
+  `date` INT NULL,
+  PRIMARY KEY (`user_id`, `level_id`),
+  INDEX `fk_user_has_nivel_nivel1_idx` (`level_id` ASC),
+  INDEX `fk_user_has_nivel_user_idx` (`user_id` ASC),
+  CONSTRAINT `fk_user_has_nivel_user`
+    FOREIGN KEY (`user_id`)
+    REFERENCES `mydb`.`user` (`iduser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_user_has_nivel_nivel1`
+    FOREIGN KEY (`level_id`)
+    REFERENCES `mydb`.`level` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`filter`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `mydb`.`filter` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `target_type` ENUM('1', '2') NOT NULL,
+  `target_id` INT NOT NULL,
+  `level_id` INT NOT NULL,
+  PRIMARY KEY (`target_type`, `target_id`, `level_id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC),
+  INDEX `fk_filter_level1_idx` (`level_id` ASC),
+  CONSTRAINT `fk_filter_level1`
+    FOREIGN KEY (`level_id`)
+    REFERENCES `mydb`.`level` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
